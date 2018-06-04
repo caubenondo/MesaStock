@@ -6,6 +6,7 @@ export default class EditView extends Component {
       
     }
     componentDidMount() {
+        
         this.firebaseRef = firebase.database().ref('items').child(this.props.itemId);
         this.firebaseCallback = this.firebaseRef.on('value', (snap) => {      
             
@@ -17,14 +18,14 @@ export default class EditView extends Component {
         this.firebaseRef.off('value', this.firebaseCallback);
     }
   render() {
-      console.log(this.state.view)
+       
     return (
       <div>
-          <ul>
+          <ol style={{textAlign:'left'}}>
               {Object.keys(this.state.item).map((key,val)=>{
-                  return <li key={key}>{key} : {this.state.item[key]} </li>
+                  return <li key={key}>{key} : {this.state.item[key] ==='' ? 'N/A':this.state.item[key]} </li>
               })}
-          </ul>
+          </ol>
       </div>
     )
   }

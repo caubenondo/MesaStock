@@ -4,6 +4,7 @@ import './App.css';
 import AddItemView from './views/AddItemView'
 import ListItemView from './views/ListItemView'
 import EditView from './views/EditView'
+import Details from './views/detail'
 class App extends Component {
 
   state = {
@@ -11,19 +12,23 @@ class App extends Component {
     itemId:''
   }
   editItem = (id) =>{
-    this.setState({edit:true,itemId:id})
+    this.setState({itemId:id})
+    this.setState({edit:true})
   }
   render() {
-    console.log(this.state.edit)
+    
     return (
-      <div className="App">
+      <div className="App ">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Mesa React Stockroom</h1>
         </header>
-       <AddItemView/> 
-        <ListItemView edit={this.editItem}/>
-        {!!this.state.edit && (<EditView itemId={this.state.itemId}/>)}
+        
+        <AddItemView className='container u-full-width'/> 
+        <hr/>
+        <ListItemView edit={this.editItem} className='container u-full-width'/>
+       {/*{this.state.edit ===true && (<DetailView itemId={this.state.itemId}/>)}*/}
+        <Details itemId={this.state.itemId}/>
       </div>
     );
   }

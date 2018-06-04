@@ -28,15 +28,38 @@ export default class ListItemView extends Component {
         firebase.database().ref('items/'+itemId).remove()
     }
   render() {
-      var listItem = this.state.someData.map((item)=>{
+     /*  var listItem = this.state.someData.map((item)=>{
         var id = item.id;
-      return <li key={item.id}>{item.name} <button onClick={()=>{this.deleteItem(id)}}>X</button><button onClick={()=>{this.props.edit(id)}}>Edit</button></li>
-      ;});
+      return <li key={item.id}>{item.name} <button onClick={()=>{this.props.edit(id)}}>Detail</button> <button onClick={()=>{this.deleteItem(id)}}>Delete</button></li>
+      ;}); */
+
+      var itemTable = this.state.someData.map((item)=>{
+          var id= item.id;
+        
+          return <tr key={item.id}><td>{item.name}</td><td>{item.type}</td><td>{item.color}</td><td>{item.price}</td><td>{item.inventory}</td><td><button onClick={()=>{this.props.edit(id)}}>Detail</button></td><td><button onClick={()=>{this.deleteItem(id)}}>Delete</button></td></tr>; 
+      });
     return (
-      <div>
-        <ul>
+      <div className='container'>
+        <h2>List View</h2>
+        {/* <ol className='u-pull-left row'>
             {listItem}
-        </ul>
+        </ol> */}
+        <table className="u-full-width">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Color</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Detail</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                {itemTable}
+            </tbody>
+        </table>
       </div>
     )
   }
